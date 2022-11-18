@@ -3,12 +3,13 @@ package votingMachine
 class Candidate (
     private val name: String,
     private val party: String = "I",
-    private var ballots: ArrayList<Ballot> = ArrayList<Ballot>(),
-    private var victorious: Boolean = false
+    var ballots: ArrayList<Ballot> = ArrayList<Ballot>(),
+    var victorious: Boolean = false
     ) {
     companion object {
-        fun parseCandidateLine(candidateLine: String): List<Candidate> {
-            return candidateLine.split(",").map { candidateFromString(it) }.distinct()
+        fun parseCandidateLine(candidateLine: String): ArrayList<Candidate> {
+            val list = candidateLine.split(",").map { candidateFromString(it) }.distinct()
+            return ArrayList<Candidate>(list)
         }
         private fun candidateFromString(candidateString: String) : Candidate {
             val temp = candidateString.split("(",")")

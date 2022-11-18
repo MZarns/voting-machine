@@ -12,11 +12,12 @@ class Ballot {
 
     constructor(preferencesArray: IntArray) {
         preferences = preferencesArray
+        this.preferences = preferencesArray
     }
     override fun toString(): String {
         return preferences.contentToString()
     }
-    fun get(): IntArray {
+    fun preference(): IntArray {
         return this.preferences
     }
 }

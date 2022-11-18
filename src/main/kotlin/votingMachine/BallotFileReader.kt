@@ -12,7 +12,7 @@ class BallotFileReader {
         // Read Headers
         val electionType: String = reader.readLine()
         val numAvailableSeats: Int = reader.readLine().toInt()
-        val candidateList: List<Candidate> = Candidate.parseCandidateLine(reader.readLine())
+        val candidateList: ArrayList<Candidate> = Candidate.parseCandidateLine(reader.readLine())
         val ballotList: ArrayList<Ballot> = ArrayList()
 
         reader.useLines { lines -> lines.forEach { ballotList.add(Ballot.ballotFromString(it))} }
@@ -28,6 +28,6 @@ class BallotFileReader {
 data class ElectionDTO (
     val electionType: String,
     val numAvailableSeats: Int,
-    val candidateList: List<Candidate>,
+    val candidateList: ArrayList<Candidate>,
     val ballotList: ArrayList<Ballot> = ArrayList()
 )

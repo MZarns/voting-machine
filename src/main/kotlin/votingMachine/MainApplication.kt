@@ -7,8 +7,8 @@ import org.springframework.boot.runApplication
 class MainApplication
 
 fun main(args: Array<String>) {
-    val filepath = "ballotFiles/ballotFile1.txt"
-    if (ElectionIRV.runElection(filepath))
+    val filepath = "ballotFiles/ballotFile3.txt"
+    if (ElectionIRV().runElection(filepath))
         println("== Election Complete ==")
 //    runApplication<MainApplication>(*args)
 }
