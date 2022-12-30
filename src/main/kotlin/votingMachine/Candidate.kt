@@ -1,7 +1,7 @@
 package votingMachine
 
 class Candidate (
-    private val name: String,
+    val name: String,
     private val party: String = "I",
     var ballots: ArrayList<Ballot> = ArrayList<Ballot>(),
     var victorious: Boolean = false

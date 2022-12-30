@@ -22,6 +22,7 @@ class ElectionIRV(private val filepath: String) {
 
         // Print out election data
         var outputValues = ArrayList<String>()
+        var graphValues = ArrayList<String>()
         var currStr: String = "=== ${electionData.electionType} Election ==="
         println(currStr)
         outputValues.add(currStr)
@@ -35,6 +36,16 @@ class ElectionIRV(private val filepath: String) {
             println(currStr)
             outputValues.add(currStr)
         }
+
+        var currLine: String = ""
+        for (candidate in candidateList) {
+            currLine += candidate.name
+            currLine += ","
+        }
+        currLine = currLine.dropLast(1)
+        graphValues.add(currLine)
+
+
         currStr = "==== Ballots ===="
         println(currStr)
         outputValues.add(currStr)
@@ -49,6 +60,14 @@ class ElectionIRV(private val filepath: String) {
 
         // First Pass; distribute all ballots to first choice
         ballotList.forEach { candidateList[it.preference().indexOf(1)].ballots.add(it) }
+
+        currLine = ""
+        for (candidate in candidateList) {
+            currLine += candidate.ballots.size
+            currLine += ","
+        }
+        currLine = currLine.dropLast(1)
+        graphValues.add(currLine)
 
         // Set IRV quota
         var currentQuota: Long = 1 + (remainingBallots.toLong() / (1 + remainingSeats))
@@ -90,6 +109,14 @@ class ElectionIRV(private val filepath: String) {
             remainingBallots -= winner.ballots.size
         }
 
+        currLine = ""
+        for (candidate in candidateList) {
+            currLine += candidate.ballots.size
+            currLine += ","
+        }
+        currLine = currLine.dropLast(1)
+        graphValues.add(currLine)
+
         // Loop until all winners are declared or until remaining candidates are deemed losers
         var passCount: Int = 1
         val loserCandidates = ArrayList<Candidate>()
@@ -117,6 +144,14 @@ class ElectionIRV(private val filepath: String) {
                 redistributeBallot(loser.ballots[0], loser)
             }
 
+            currLine = ""
+            for (candidate in candidateList) {
+                currLine += candidate.ballots.size
+                currLine += ","
+            }
+            currLine = currLine.dropLast(1)
+            graphValues.add(currLine)
+
             // Check for winner
             for (candidate in remainingCandidates) {
                 if (candidate.ballots.size >= currentQuota) {
@@ -135,7 +170,6 @@ class ElectionIRV(private val filepath: String) {
                 removeTheseCandidates.removeAt(0)
             }
 
-            break
         }
 
         // Declare remaining winners even if quota is not met
@@ -158,12 +192,18 @@ class ElectionIRV(private val filepath: String) {
                 .removePrefix("ballotFiles/")
                 .removeSuffix(".txt").plus("Output").plus(".csv")
         )
+        val graphFilename = "graphFiles/".plus(filepath
+            .removePrefix("ballotFiles/")
+            .removeSuffix(".txt").plus(".csv")
+        )
         writeAsCSV(outputValues, outputFilename)
+        writeAsCSV(graphValues, graphFilename)
 
         return true
     }
 
     private fun redistributeBallot(ballot: Ballot, currCandidate: Candidate) {
+        currCandidate.ballots.remove(ballot)
         val currCandidateIdx = candidateList.indexOf(currCandidate)
         val currCandidateRank = ballot.preference()[currCandidateIdx]
         val newIndex = ballot.preference().indexOf(currCandidateRank + 1)

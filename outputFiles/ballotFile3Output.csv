@@ -30,7 +30,7 @@
 > [3, 1, 2, 5, 6, 7, 4]
 > [1, 5, 2, 6, 4, 7, 3]
 ==== First Pass Results ====
-Current Quota: 5
+Current Quota: 8
 > Joe (D): 9
 > Donald (R): 2
 > Michael (G): 1
@@ -39,7 +39,5 @@ Current Quota: 5
 > Ye (Y): 0
 > Ron (R): 5
 ==== Winners ====
-> Joe (D): 9
-> Ron (R): 9
-> Donald (R): 2
-> Michael (G): 1
+> Joe (D): 8
+> Ron (R): 6

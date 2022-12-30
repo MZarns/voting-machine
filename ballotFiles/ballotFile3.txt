@@ -1,5 +1,5 @@
 IRV
-4
+2
 Joe(D),Donald(R),Michael(G),Hillary(D),Alex(I),Ye(Y),Ron(R)
 1,2,3,4,5,6,7
 1,2,3,4,5,6,7
