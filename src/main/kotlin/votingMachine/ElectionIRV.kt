@@ -21,8 +21,8 @@ class ElectionIRV(private val filepath: String) {
         val remainingCandidates = ArrayList<Candidate>(candidateList)
 
         // Print out election data
-        var outputValues = ArrayList<String>()
-        var graphValues = ArrayList<String>()
+        val outputValues = ArrayList<String>()
+        val graphValues = ArrayList<String>()
         var currStr: String = "=== ${electionData.electionType} Election ==="
         println(currStr)
         outputValues.add(currStr)
