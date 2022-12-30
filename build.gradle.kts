@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.7.1"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
-	kotlin("jvm") version "1.6.21"
+	kotlin("jvm") version "1.7.21"
 	kotlin("plugin.spring") version "1.4.32"
 	kotlin("plugin.allopen") version "1.4.32"
 	kotlin("plugin.jpa") version "1.4.32"
@@ -19,13 +19,16 @@ repositories {
 }
 
 dependencies {
+	implementation("org.jetbrains.lets-plot:lets-plot-common:2.5.1")
+	implementation("org.jetbrains.lets-plot:lets-plot-kotlin-jvm:4.1.1")
+	implementation("org.jetbrains.lets-plot:lets-plot-kotlin-jvm:4.1.1")
 	implementation("org.springframework.boot:spring-boot-starter-websocket")
 	implementation("org.webjars:webjars-locator-core")
 	implementation("org.webjars:sockjs-client:1.5.1")
 	implementation("org.webjars:stomp-websocket:2.3.4")
-	implementation("org.webjars:bootstrap:5.2.0")
+	implementation("org.webjars:bootstrap:5.2.2")
 	implementation("org.webjars:jquery:3.6.1")
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.4")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.0")
 	implementation("org.jetbrains.kotlin:kotlin-allopen")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("com.h2database:h2")
