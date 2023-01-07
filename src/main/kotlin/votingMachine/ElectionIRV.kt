@@ -76,6 +76,7 @@ class ElectionIRV(private val filepath: String) {
         candidateList.forEach {
             if (it.ballots.size >= currentQuota) {
                 winnerList.add(it)
+                it.victorious = true
                 remainingSeats --
                 removeTheseCandidates.add(it)
             }
@@ -156,6 +157,7 @@ class ElectionIRV(private val filepath: String) {
             for (candidate in remainingCandidates) {
                 if (candidate.ballots.size >= currentQuota) {
                     winnerList.add(candidate)
+                    candidate.victorious = true
                     remainingSeats --
                     remainingBallots -= candidate.ballots.size
                     removeTheseCandidates.add(candidate)
@@ -174,7 +176,9 @@ class ElectionIRV(private val filepath: String) {
 
         // Declare remaining winners even if quota is not met
         for (i in 0 until remainingSeats) {
-            winnerList.add(loserCandidates[loserCandidates.size - 1])
+            val candidate = loserCandidates[loserCandidates.size - 1]
+            winnerList.add(candidate)
+            candidate.victorious = true
             remainingSeats --
         }
             currStr = "==== Winners ===="
@@ -190,11 +194,10 @@ class ElectionIRV(private val filepath: String) {
         // Write to output.csv file
         val outputFilename = "outputFiles/".plus(filepath
                 .removePrefix("ballotFiles/")
-                .removeSuffix(".txt").plus("Output").plus(".csv")
+                .removeSuffix(".csv").plus("Output").plus(".csv")
         )
         val graphFilename = "graphFiles/".plus(filepath
             .removePrefix("ballotFiles/")
-            .removeSuffix(".txt").plus(".csv")
         )
         writeAsCSV(outputValues, outputFilename)
         writeAsCSV(graphValues, graphFilename)
