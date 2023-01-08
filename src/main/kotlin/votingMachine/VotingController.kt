@@ -23,10 +23,8 @@ class VotingController {
         Thread.sleep(100)
         val preferenceString = message.preferenceString()
         val newBallot = HtmlUtils.htmlEscape(preferenceString)
-
-        val writeSuccessful: Boolean = false
-        File(filename).appendText("\n"+preferenceString)
-        return Message("Vote cast successfully: $preferenceString")
+        File(filename).appendText("\n"+newBallot)
+        return Message("Vote cast successfully: $newBallot")
     }
 
     @MessageMapping("/message")
